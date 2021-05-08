@@ -1,38 +1,33 @@
 import React, { useState } from 'react'
-import { Container, Overlay } from './style'
+import { Container, Overlay, Size } from './style'
 import Link from 'next/link'
 
-import {
-  FaBars,
-  FaFacebook,
-  FaInstagram,
-  FaTimes,
-  FaWhatsapp,
-  FaYoutube
-} from 'react-icons/fa'
+import { FaBars, FaTimes } from 'react-icons/fa'
 
-import { SideBarData } from '../../utils/SideBarData'
+import { SideBarData, SocialLinks } from '../../utils/SideBarData'
 const NewSideBar: React.FC = () => {
   const [sidebar, setSidebar] = useState(false)
 
   const showSidebar = () => setSidebar(!sidebar)
 
   return (
-    <Container>
+    <Container fixed={false}>
       {sidebar && <Overlay onClick={showSidebar} />}
 
       <div className="mobile">
         <div className="navbar">
-          <div className="boxImg">
-            <Link href="/profile">
-              <h2>
-                <span>&lt;</span> Levir Lemos <span>/&gt;</span>
-              </h2>
-            </Link>
-          </div>
-          <button className="menuBars">
-            <FaBars onClick={showSidebar} />
-          </button>
+          <Size max={'1100px'}>
+            <div className="boxImg">
+              <Link href="/">
+                <h2>
+                  <span>&lt;</span> Levir Lemos <span>/&gt;</span>
+                </h2>
+              </Link>
+            </div>
+            <button className="menuBars">
+              <FaBars onClick={showSidebar} />
+            </button>
+          </Size>
         </div>
         <nav className={sidebar ? 'navMenuActive' : 'navMenuDisable'}>
           <ul className="navMenuItems">
@@ -51,18 +46,13 @@ const NewSideBar: React.FC = () => {
               )
             })}
             <li className="navText">
-              <a href="https://www.instagram.com/levirlms/">
-                <FaInstagram />
-              </a>
-              <a href="https://www.facebook.com/levir.lemos/">
-                <FaFacebook />
-              </a>
-              <a href="https://www.youtube.com/channel/UCWE4KnYvGHVtJ2oWfZCSocA">
-                <FaYoutube />
-              </a>
-              <a href="https://wa.me/5585998413146">
-                <FaWhatsapp />
-              </a>
+              {SocialLinks.map((item, index) => {
+                return (
+                  <a key={index} href={item.url}>
+                    {item.icon}
+                  </a>
+                )
+              })}
             </li>
           </ul>
         </nav>

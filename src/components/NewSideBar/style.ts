@@ -1,5 +1,19 @@
 import styled from 'styled-components'
 
+export interface Props {
+  fixed?: boolean
+  max?: string
+}
+
+export const Size = styled.div`
+  margin: 0 auto;
+  max-width: ${(props: Props) => props.max};
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+
 export const Overlay = styled.div`
   position: fixed;
   z-index: 998;
@@ -9,9 +23,14 @@ export const Overlay = styled.div`
   height: 100vh;
   background-color: ${props => props.theme.colors.background};
   opacity: 0.5;
+  transition: 350ms;
 `
-
 export const Container = styled.div`
+  position: ${(props: Props) => props.fixed && 'fixed'};
+  top: ${(props: Props) => props.fixed && '0'};
+  left: ${(props: Props) => props.fixed && '0'};
+  width: ${(props: Props) => props.fixed && '100%'};
+  z-index: ${(props: Props) => props.fixed && '999'};
   .mobile {
     display: block;
   }
@@ -21,9 +40,7 @@ export const Container = styled.div`
   }
 
   .navbar {
-    padding: 1rem 2rem;
     background-color: ${props => props.theme.colors.primary};
-    height: 5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -47,6 +64,8 @@ export const Container = styled.div`
     color: white;
     border: 0;
     padding: 1rem;
+    cursor: pointer;
+    transition: 350ms;
   }
 
   .navMenuActive {
@@ -241,6 +260,16 @@ export const Container = styled.div`
     }
     .desktop {
       display: none;
+    }
+  }
+
+  @media (max-width: 350px) {
+    .navbar {
+      .boxImg {
+        h2 {
+          margin-left: 0.2rem;
+        }
+      }
     }
   }
 `

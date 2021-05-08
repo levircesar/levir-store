@@ -3,7 +3,7 @@
 import React from 'react'
 import { FaAngleRight, FaAngleLeft } from 'react-icons/fa'
 const properties = {
-  duration: 3000,
+  duration: 5000,
   transitionDuration: 500,
   pauseOnHover: true,
   infinite: true,
