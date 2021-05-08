@@ -52,6 +52,22 @@ export const getStaticProps: GetStaticProps = async () => {
 function Home({ product, price }: StoreProps) {
   const [amount, setAmount] = useState(0)
   const [cart, setCart] = useState([])
+  const [teste, setTeste] = useState([])
+
+  function criarNovoArray() {
+    product.map(item => {
+      price.find(valor => {
+        if (valor.product === item.id) {
+          const array = {
+            product: valor.product,
+            price: valor.id,
+            preco: valor.unit_amount
+          }
+          setTeste(oldvalor => [...oldvalor, array])
+        }
+      })
+    })
+  }
 
   function calculateAmount() {
     let newValue = 0
@@ -94,8 +110,13 @@ function Home({ product, price }: StoreProps) {
   }
 
   useEffect(() => {
+    criarNovoArray()
+  }, [])
+
+  useEffect(() => {
     calculateAmount()
   }, [cart])
+
   return (
     <Container>
       <Head>
@@ -179,12 +200,12 @@ function Home({ product, price }: StoreProps) {
           </div>
           <div>
             <h2>Itens no carrinho</h2>
-            {cart.map(item => {
+            {cart.map(chave => {
               return (
-                <>
-                  <h2>{item.price}</h2>
-                  <p>quantidade : {item.quantity}</p>
-                </>
+                <div key={chave.price}>
+                  <h2>{chave.price}</h2>
+                  <p>quantidade : {chave.quantity}</p>
+                </div>
               )
             })}
           </div>

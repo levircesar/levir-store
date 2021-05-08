@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React, { useState } from 'react'
+import React from 'react'
 import Stripe from 'stripe'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import stripeConfig from '../../../config/stripe'
